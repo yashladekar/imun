@@ -1,26 +1,36 @@
-const bodyParser = require('body-parser');
-const path = require('path')
 const express = require('express');
+const bodyParser = require('body-parser');
+const ejs = require('ejs')
+const path = require('path')
 const app = express();
 
-const ejs = require('ejs')
 require("./db/conn");
 const Register = require('./register');
 // const { execPath } = require('process');
 
+app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.json());
 // app.use(express.urlencoded({ extended: false }))
 app.use(express.static("public"));
 // app.set('views', path.join(__dirname, 'views'));
 
-app.set('view engine', 'ejs');
 
+
+
+// home route
 app.get('/', (req, res) => {
-    res.render("form");
+    res.render("home");
 })
-//create  a new user in our database
-app.get('/form', async (req, res) => {
+
+
+// registration route 
+
+app.get("/registration", (req, res) => {
+    res.render("registration");
+})
+
+app.post('/registration', async (req, res) => {
     try {
         const password = req.query.Password;
         const cPassword = req.query.conformPassword;
@@ -43,6 +53,17 @@ app.get('/form', async (req, res) => {
     }
 })
 
+
+// about route
+
+app.get("/about", (req, res) => {
+    res.render("about");
+})
+
+// contact us route 
+app.get("/contact", (req, res) => {
+    res.render("contactUs");
+})
 
 app.listen(4000, () => {
     console.log("server started on port 4000, as http://localhost:4000");
