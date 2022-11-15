@@ -30,28 +30,28 @@ app.get("/registration", (req, res) => {
     res.render("registration");
 })
 
-app.post('/registration', async (req, res) => {
-    try {
-        const password = req.query.Password;
-        const cPassword = req.query.conformPassword;
-        console.log(req.query.FName);
-        if (password === cPassword) {
-            const register = new Register({
+// app.post('/registration', async (req, res) => {
+//     try {
+//         const password = req.query.Password;
+//         const cPassword = req.query.conformPassword;
+//         console.log(req.query.FName);
+//         if (password === cPassword) {
+//             const register = new Register({
 
-                firstname: req.query.FName,
-                lastname: req.query.LName,
-                email: req.query.Email,
-                password: password
-            })
-            const registered = await register.save()
-            res.status(201).render("index");
-        } else {
-            res.send("password does not match");
-        }
-    } catch (error) {
-        res.status(400).send(error);
-    }
-})
+//                 firstname: req.query.FName,
+//                 lastname: req.query.LName,
+//                 email: req.query.Email,
+//                 password: password
+//             })
+//             const registered = await register.save()
+//             res.status(201).send(res.query);
+//         } else {
+//             res.send(req.query);
+//         }
+//     } catch (error) {
+//         res.status(400).send(error);
+//     }
+// })
 
 
 // about route
