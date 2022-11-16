@@ -8,16 +8,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 require('dotenv').config();
 app.set('view engine', 'ejs');
 app.get('/', (req, res) => {
-    res.render('registration')
+    // res.render('registration')
+    res.render('form')
 })
-app.post('/registration', async (req, res) => {
+app.post('/', async (req, res) => {
+    const { name, lname } = req.body;
 
-    // const credentails = JSON.parse(process.env.credentails);
 
-    // res.send("hello world")
     const auth = new google.auth.GoogleAuth({
         keyFile: "credentails.json",
-        // key:credentails.key,
+        
         scopes: "https://www.googleapis.com/auth/spreadsheets",
     });
     //create client instance for auth 
@@ -25,24 +25,15 @@ app.post('/registration', async (req, res) => {
 
     //instance of google sheets api 
     const googleSheets = google.sheets({ version: "v4", auth: client });
-    // const spreadsheetId = "1rP3jWoO2xb3kw8dW1nnWyZz_JmzVE-90g3FGKYyLRw4"
     const spreadsheetId = process.env.spreadsheetId_env
 
     //get metadata about spreadsheet
-    // const metaData = await googleSheets.spreadsheets.get({
-    //     auth,
-    //     spreadsheetId,
-    // });
-
-    //read rows form spreadsheets 
-    // const getRows = await googleSheets.spreadsheets.values.get({
-    //     auth,
-    //     spreadsheetId,
-    //     range: "Sheet1"
-    // })
-
-
+    const metaData = await googleSheets.spreadsheets.get({
+        auth,
+        spreadsheetId,
+    });
     //write row(s)  to spreadsheet
+
     await googleSheets.spreadsheets.values.append({
         auth,
         spreadsheetId,
@@ -50,14 +41,13 @@ app.post('/registration', async (req, res) => {
         valueInputOption: "USER_ENTERED",
         resource: {
             values: [
-                ['make a tutorial', 'test'],
+                [name, lname],
+                /// filed need to be changed accroding the input fields 
             ]
         }
 
     })
-
-
-    res.send(getRows.data);
+    res.send("successfully submitted");
 })
 
 app.listen(4001, (req, res) => {

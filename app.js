@@ -6,26 +6,19 @@ const app = express();
 
 require("./db/conn");
 const Register = require('./register');
-// const { execPath } = require('process');
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.json());
-// app.use(express.urlencoded({ extended: false }))
+
 app.use(express.static("public"));
-// app.set('views', path.join(__dirname, 'views'));
-
-
-
 
 // home route
 app.get('/', (req, res) => {
     res.render("home");
 })
 
-
 // registration route 
-
 app.get("/registration", (req, res) => {
     res.render("registration");
 })
@@ -53,9 +46,7 @@ app.get("/registration", (req, res) => {
 //     }
 // })
 
-
 // about route
-
 app.get("/about", (req, res) => {
     res.render("about");
 })
