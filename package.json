@@ -1,22 +1,27 @@
 {
-  "name": "imun",
+  "name": "imun-1",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/app.js -e js,ejs"
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dypimun/IMUN.git"
   },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dypimun/IMUN/issues"
+  },
+  "homepage": "https://github.com/dypimun/IMUN#readme",
   "dependencies": {
     "body-parser": "^1.20.1",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
     "express": "^4.18.2",
     "googleapis": "^109.0.1",
-    "mongod": "^2.0.0",
-    "mongoose": "^6.7.2",
     "nodemon": "^2.0.20"
   }
 }
